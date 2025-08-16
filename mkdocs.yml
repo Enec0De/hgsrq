@@ -1,0 +1,188 @@
+# Project information
+site_name: 文档实践手册
+site_url: https://hgsrq.fun
+site_author: Aina
+site_description: >-
+  Handy Guide, Standard References & Quickstarts.
+
+# Repository
+repo_name: Enec0De/hgsrq
+repo_url: https://github.com/Enec0De/hgsrq
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: >-
+  Copyright &copy; 2025 Aina. Licensed under 
+  <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a>.<br>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">赣 ICP 备 2025069805 号</a>
+
+# Configuration
+theme:
+  name: material
+  language: zh
+  features:
+    # - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.preview
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    # - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    # - offline
+    # - search.highlight
+    # - search.share
+    # - search.suggest
+    - toc.follow
+    # - toc.integrate
+  palette: 
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/jellyfish
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/jellyfish-outline
+        name: Switch to light mode
+  font: false
+  favicon: assets/images/jellyfish-outline.svg
+  icon:
+    logo: material/format-list-text
+    view: material/file-eye-outline
+    # edit: material/pencil
+    # repo: material/git
+
+# Plugins
+plugins:
+  - search:
+      lang: zh
+      # separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  # - minify:
+      # minify_html: true
+
+# Additional configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Enec0De
+    # - icon: fontawesome/brands/x-twitter
+    #   link: https://x.com/home
+
+extra_javascript:
+  - assets/javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - assets/stylesheets/extra.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+#Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  # - pymdownx.betterem:
+  #     smart_enable: all
+  # - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+      line_spans: __span
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  # - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      base_path: src/
+  #     auto_append
+  #       - includes/abbreviations.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  # - pymdownx.tilde
+
+# Page tree
+nav:
+  - 前言: index.md
+  - 系统学习实践:
+    - 静态 IP 配置: practice/network.md
+    - 系统升级与紧急降级: practice/apt-advanced.md
+    - 配置 NGINX: practice/nginx.md  
+  - 版本与规范:
+    - 手册规范: specversions/template.md
+    - 更新日志: specversions/changelog.md
+  - 其他 / 草稿 / 过时内容:
+    - 文档规范 (其他): 
+      - 基本结构: fundamentals/structure.md
+      - 引用链接: fundamentals/links-and-references.md
+      - 列表元素: fundamentals/lists.md
+      - 代码块元素: fundamentals/code-blocks.md
+      - 网格元素: fundamentals/grid-layouts.md
+      - 表格元素: fundamentals/tables.md
+      - 其他元素: fundamentals/other-elements.md
+    - Debian 参考手册 (草稿):
+      - GNU/Linux 教程: linux/debian/tutorials.md
+      - Debian 软件包管理: linux/debian/package-management.md
+      - 系统初始化: linux/debian/system-initialization.md
+      - 认证和访问控制: linux/debian/auth-and-ac.md
+      - 网络设置: linux/debian/network-setup.md
+      - 网络应用: linux/debian/network-apps.md
+      - GUI 系统: linux/debian/gui.md
+      - 国际化和本地化: linux/debian/i18n-and-l10n.md
+    - Linux (草稿): 
+      - Linux 常用工具: linux/tools/essential-commands.md
+      - Shell 语法: linux/tools/shell.md
+      - 正则表达式: linux/tools/regex.md
+    - Python (草稿): 
+      - 基本语法: programming/python/basics.md
+      - 面向对象: programming/python/object-oriented.md
+      - 操作系统模型: programming/python/system-interaction.md
+    - 云计算相关 (过时):
+      - 云计算概述: courses/01-cloud-overview.md
+      - 计算服务之云服务器: courses/02-cvm-service.md
+      - 计算服务之容器技术: courses/03-compute-container-tech.md
+      - 云网络服务: courses/04-network-service.md
+      - 云存储服务: courses/05-storage-service.md
+      - 云数据库服务: courses/06-database-service.md
+      - 云安全服务: courses/07-security-service.md
