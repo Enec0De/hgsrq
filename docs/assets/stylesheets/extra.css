@@ -1,0 +1,13 @@
+/* 定义等宽字体 */
+@font-face {
+  font-family: "BrightCode-Light";
+  src:
+    url("../fonts/LXGWBrightCode-Light.woff2");
+  font-display: swap;
+}
+
+/* 设定全局字体 */
+:root {
+   --md-text-font: "BrightCode-Light";
+   --md-code-font: "BrightCode-Light";
+ }
