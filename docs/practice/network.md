@@ -5,7 +5,7 @@ title: 静态网络配置
 静态 IP 配置实践 { id="network" }
 =================================
 
-> 创建于：2025-08-09 | 最后更新：2025-08-13
+> 创建于：2025-08-09 | 最后更新：2025-08-19
 
 ---
 
@@ -48,9 +48,10 @@ title: 静态网络配置
 # Date Created: 2025-08-13 | Date Modified: 2025-08-13
 
 # Exit immediately if a command exits with a non-zero status
-set -e
+# Treat unset variables as an error and exit immediately
+set -eu
 
-# Judge the permission
+# Check the permission
 if [ $(id -u) -ne 0 ]; then
     echo 'This script must be run with `sudo`.'
     exit 1
