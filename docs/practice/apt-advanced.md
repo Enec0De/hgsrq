@@ -5,7 +5,7 @@ title: 系统升级与紧急降级
 系统升级与紧急降级 { id="apt-advanced" }
 ========================================
 
-> 创建于：2025-08-14 | 最后更新：2025-08-14
+> 创建于：2025-08-14 | 最后更新：2025-08-19
 
 ---
 
@@ -56,9 +56,10 @@ title: 系统升级与紧急降级
 # Date Created: 2025-08-15 | Date Modified: 2025-08-15
 
 # Exit immediately if a command exits with a non-zero status
-set -e
+# Treat unset variables as an error and exit immediately
+set -eu
 
-# Judge the permission
+# Check the permission
 if [ $(id -u) -ne 0 ]; then
     echo 'This script must be run with `sudo`.'
     exit 1
@@ -130,6 +131,8 @@ systemctl reboot
 === ":octicons-file-code-16: Latest version of pip3"
 
     ``` sh title="/etc/apt/preferences"
+    Explanation: Date Created: 2025-08-14 | Date Modified: 2025-08-14
+
     Explanation: Install only the most recent trixie version of pip3
     Package: python3-pip
     Pin: release n=trixie*
@@ -146,6 +149,8 @@ systemctl reboot
 === ":octicons-file-code-16: Downgrade the pip3"
 
     ``` sh title="/etc/apt/preferences"
+    Explanation: Date Created: 2025-08-14 | Date Modified: 2025-08-14
+
     Explanation: Emergency_downgrading  
     Package: *
     Pin: release n=bookworm*
