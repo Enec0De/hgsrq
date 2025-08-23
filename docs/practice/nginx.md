@@ -5,7 +5,7 @@ title: 配置 Nginx
 配置 Nginx { id="nginx" }
 =============================
 
-> 创建于：2025-08-16 | 最后更新：2025-08-19
+> 创建于：2025-08-16 | 最后更新：2025-08-23
 
 ---
 
@@ -68,7 +68,7 @@ fi
 === ":octicons-file-code-16: `/etc/nginx/sites-available/default`: 主要"
 
     ``` nginx linenums="1"
-    # Date Created: 2025-08-17 | Date Modified: 2025-08-19
+    # Date Created: 2025-08-17 | Date Modified: 2025-08-23
 
     # HTTPS server configuration
     #
@@ -85,23 +85,26 @@ fi
         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
     
         root /var/www/html;
-    
         index index.html;
     
         server_name example.com;
-    
+
         location / {
-            # First attempt to serve request as file, then
-            # as directory, then fall back to displaying a 404.
             try_files $uri $uri/ =404;
+        }
+
+        error_page 404 /404.html;
+
+        location = /404.html {
+            internal;
         }
     }
     ```
 
 === ":octicons-file-code-16: `/etc/nginx/sites-available/default`: 可选"
 
-    ``` nginx linenums="28"
-    # Date Created: 2025-08-17 | Date Modified: 2025-08-19
+    ``` nginx linenums="32"
+    # Date Created: 2025-08-17 | Date Modified: 2025-08-23
 
     server {
         listen 80;
@@ -119,6 +122,7 @@ fi
     
         server_name _;
     
+        # Reject SSL/TLS handshake
         ssl_reject_handshake on;
     }    
     
@@ -128,6 +132,7 @@ fi
     
         server_name _;
     
+        # Close the connection immediately
         return 444;
     }
     ```
@@ -145,13 +150,11 @@ fi
 
 -   **原因分析：**
 
-    可能是静态资源加载失败，或是 MIME 类型配置缺失。
-
-    前者导致 Nginx 没有网页资源的读取权限，使得资源无法被访问；后者导致 Nginx 未能正确识别文件类型，将其当作默认的 text/plain 处理，无法解析（例如 CSS 不生效、JS 无法执行）。
+    可能是静态资源加载失败，或是 MIME 类型配置缺失。前者的原因是 Nginx 没有网页资源的读取权限，使得资源无法被访问；后者的原因是 Nginx 无法正确识别文件类型，将其当作默认的 `text/plain` 处理，无法解析（例如 CSS 不生效、JS 无法执行）。
 
 -   **解决方案：**
 
-    检查 `/var/log/nginx` 下的 `access.log` 和 `error.log` 日志文件，查看是否有权限报错。如果有，则需要将相关文件的权限设置为 **www-data** 用户可读。进一步检查 Nginx 配置中是否包含 `include /etc/nginx/mime.types;` 内容，通常在 `/etc/nginx/nginx.conf` 内的 `http` 上下文当中。
+    检查 `/var/log/nginx` 下的 `access.log` 和 `error.log` 日志文件，查看是否有权限报错。如果有，则需要设置相关文件的权限，使得 **www-data** 用户至少有读权限。进一步检查 Nginx 配置中是否包含 `include /etc/nginx/mime.types;` 内容，通常在 `/etc/nginx/nginx.conf` 内的 `http` 上下文当中。以上两个操作都需要重启 Nginx 服务以应用改动。
 
 **2. 浏览器提示连接不安全**
 
@@ -165,9 +168,7 @@ fi
 
 -   **解决方案：**
 
-    `certbot` 一般都会通过 `crontab` 或者 `systemd.timer` 自动续期证书，相应配置在安装和获取证书时会自动安装，但是需要你手动重启 Nginx 服务重载证书。如果你不想手动重启 Nginx 服务，可以在自动续期的命令中加上 `--deploy-hook "systemctl reload nginx"` 选项。证书与域名不匹配的情况，可能是用户直接通过了 IP 来访问网页，建议只通过对应的域名访问网页。
-
-    如果网页被中间人篡改了，请通知用户停止访问该网页的内容，并暂时关闭网页。
+    `certbot` 一般都会通过 `crontab` 或者 `systemd.timer` 自动续期证书，相应配置在安装和获取证书时会自动安装，但是需要你手动重启 Nginx 服务重载证书。如果你不想手动重启 Nginx 服务，可以在自动续期的命令中加上 `--deploy-hook "systemctl reload nginx"` 选项。证书与域名不匹配的情况，可能是用户直接通过了 IP 来访问网页，建议只通过对应的域名访问网页。如果网页被中间人篡改了，请通知用户停止访问该网页的内容，并暂时关闭网页。
 
 ---
 

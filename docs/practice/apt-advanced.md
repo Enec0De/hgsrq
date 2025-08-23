@@ -5,7 +5,7 @@ title: 系统升级与紧急降级
 系统升级与紧急降级 { id="apt-advanced" }
 ========================================
 
-> 创建于：2025-08-14 | 最后更新：2025-08-19
+> 创建于：2025-08-14 | 最后更新：2025-08-23
 
 ---
 
@@ -49,7 +49,7 @@ title: 系统升级与紧急降级
 
     -   更新系统后：手动执行 `apt purge '~o'`、`apt purge '~c'` 和 `apt autoremove` 命令，清理多余的包和配置文件。
 
-``` sh linenums="1" hl_lines="15-21 37-39 41-48 50-55 57-59 61-64"
+``` sh linenums="1" hl_lines="16-22 38-40 42-49 51-56 58-60 62-65"
 #!/usr/bin/env sh
 # Script Name: upgrading_the_system.sh
 # Author: Aina
