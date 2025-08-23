@@ -5,7 +5,7 @@ title: 静态网络配置
 静态 IP 配置实践 { id="network" }
 =================================
 
-> 创建于：2025-08-09 | 最后更新：2025-08-19
+> 创建于：2025-08-09 | 最后更新：2025-08-23
 
 ---
 
@@ -41,7 +41,7 @@ title: 静态网络配置
 1.  卸载 `ifupdown` 工具集，删除相关服务文件，避免与 `NetworkManager` 冲突。
 1.  最后重启以应用修改。
 
-``` sh linenums="1" hl_lines="24-27 29-30 40-49 51-52 54-57"
+``` sh linenums="1" hl_lines="25-28 30-31 41-50 52-53 55-58"
 #!/usr/bin/env sh
 # Script Name: switch_network_management.sh
 # Author: Aina

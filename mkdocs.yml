@@ -149,6 +149,7 @@ nav:
     - 静态 IP 配置: practice/network.md
     - 系统升级与紧急降级: practice/apt-advanced.md
     - 配置 NGINX: practice/nginx.md  
+    - 密钥操作与文件同步: practice/ssh-rsync.md
   - 版本与规范:
     - 手册规范: specversions/template.md
     - 更新日志: specversions/changelog.md

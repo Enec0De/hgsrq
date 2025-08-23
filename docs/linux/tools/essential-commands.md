@@ -170,3 +170,12 @@ wget -r -np -nH --cut-dirs=2 -R "index.html*" "https://example.com/dir1/dir2/fil
 
     
     </div>
+
+---
+
+`ssh-keygen`: 
+
+-   SSHFP: `ssh-keygen -r hostname [-g]`
+-   区分：`ssh-keygen -B / -l [-E md5/sha256]`
+-   格式：`ssh-keygen -y / -i / -e [-m RFC4716]`
+-   密码：`ssh-keygen -p [-N ... ] [-P ... ]`
