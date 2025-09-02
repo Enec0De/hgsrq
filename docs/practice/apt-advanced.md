@@ -5,7 +5,7 @@ title: 系统升级与紧急降级
 系统升级与紧急降级 { id="apt-advanced" }
 ========================================
 
-> 创建于：2025-08-14 | 最后更新：2025-08-23
+> 创建于：2025-08-14 | 最后更新：2025-09-02
 
 ---
 
@@ -216,7 +216,7 @@ systemctl reboot
 
 [debian]: https://mirrors.ustc.edu.cn/help/debian.html "Debian - USTC Mirror Help"
 [debian-security]: https://mirrors.ustc.edu.cn/help/debian-security.html "Debian Security - USTC Mirror Help"
-[aptpinning]: https://manpages.debian.org/trixie/apt/apt_preferences.5.en.html "APT_PREFERENCES(5)"
+[aptpinning]: https://manpages.debian.org/bookworm/apt/apt_preferences.5.en.html "APT_PREFERENCES(5)"
 [release-notes]: https://www.debian.org/releases/trixie/release-notes/index.html "Release Notes for Debian 13 (trixie)"
 
 [^1]: Debian 13 是在 2025 年 8 月 9 日正式发布的。

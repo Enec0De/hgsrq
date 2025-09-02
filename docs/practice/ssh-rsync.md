@@ -5,7 +5,7 @@ title: 密钥操作与文件同步
 密钥操作与文件同步 { id="ssh-rsync" }
 =====================================
 
-> 创建于：2025-08-20 | 最后更新：2025-08-23
+> 创建于：2025-08-20 | 最后更新：2025-09-02
 
 ---
 
@@ -171,7 +171,7 @@ title: 密钥操作与文件同步
 -   `openssh` 相关文档：[`man 1 ssh`][ssh]、[`man 1 ssh-keygen`][ssh-keygen]、[`man 1 ssh-copy-id`][ssh-copy-id]、[`man 5 ssh_config`][ssh-config]
 
 [rsync]: https://manpages.debian.org/bookworm/rsync/rsync.1.en.html "RSYNC(1)"
-[ssh]: https://manpages.debian.org/trixie/openssh-client/ssh.1.en.html "SSH(1)"
-[ssh-keygen]: https://manpages.debian.org/trixie/openssh-client/ssh-keygen.1.en.html "SSH-KEYGEN(1)"
-[ssh-copy-id]: https://manpages.debian.org/trixie/openssh-client/ssh-copy-id.1.en.html "SSH-COPY-ID(1)"
-[ssh-config]: https://manpages.debian.org/trixie/openssh-client/ssh_config.5.en.html "SSH_CONFIG(5)"
+[ssh]: https://manpages.debian.org/bookworm/openssh-client/ssh.1.en.html "SSH(1)"
+[ssh-keygen]: https://manpages.debian.org/bookworm/openssh-client/ssh-keygen.1.en.html "SSH-KEYGEN(1)"
+[ssh-copy-id]: https://manpages.debian.org/bookworm/openssh-client/ssh-copy-id.1.en.html "SSH-COPY-ID(1)"
+[ssh-config]: https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html "SSH_CONFIG(5)"

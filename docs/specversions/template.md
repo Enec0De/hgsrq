@@ -5,7 +5,7 @@ title: Markdown 语法规范
 Markdown 语法规范 { id=“template” }
 ===================================
 
-> 创建于：2025-08-11 | 最后更新：2025-08-11
+> 创建于：2025-08-11 | 最后更新：2025-09-02
 
 ---
 
@@ -263,17 +263,19 @@ Any code ...
 
 ``` markdown title="KaTeX" linenums="1"
 Fourier Transform:
-$$
+
+\\[
 \mathcal{F} \{f(t)\} (\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt.
-$$
+\\]
 ```
 
 <div class="result" markdown> 
 
 Fourier Transform:
-$$
+
+\\[
 \mathcal{F} \{f(t)\} (\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt.
-$$
+\\]
 
 </div>
 
