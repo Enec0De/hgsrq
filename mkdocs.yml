@@ -150,6 +150,7 @@ nav:
     - 系统升级与紧急降级: practice/apt-advanced.md
     - 配置 NGINX: practice/nginx.md  
     - 密钥操作与文件同步: practice/ssh-rsync.md
+    - 日常运维工作: practice/daily-maintenance.md
   - 版本与规范:
     - 手册规范: specversions/template.md
     - 更新日志: specversions/changelog.md
@@ -175,6 +176,7 @@ nav:
       - Linux 常用工具: linux/tools/essential-commands.md
       - Shell 语法: linux/tools/shell.md
       - 正则表达式: linux/tools/regex.md
+      - 对于 ps 工具的一些疑问: linux/tools/ps.md
     - Python (草稿): 
       - 基本语法: programming/python/basics.md
       - 面向对象: programming/python/object-oriented.md

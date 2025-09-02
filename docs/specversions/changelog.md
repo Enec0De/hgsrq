@@ -5,12 +5,18 @@ title: 更新日志
 更新日志 { #changelog }
 ========
 
-> 创建于：2025-08-09 | 最后更新：2025-08-23
+> 创建于：2025-08-09 | 最后更新：2025-09-02
 
 ---
 
 Handy Guide: Standard References & Quickstarts
 ----------------------------------------------
+
+### v1.2.0 - 2025-09-02 { id="1.2.0" }
+
+-   Added: 添加了[日常运维工作][daily-maintenance]页面
+-   Fixed: 修正了[密钥操作与文件同步][ssh-rsync]与[系统升级与紧急降级][apt-advanced]页面的部分网址链接错误
+-   Fxied: 修改了[手册规范][template]中数学公式的语法
 
 ### v1.1.0 - 2025-08-23 { id="1.1.0" }
 
@@ -30,4 +36,6 @@ Handy Guide: Standard References & Quickstarts
 [network]: ../practice/network.md
 [apt-advanced]: ../practice/apt-advanced.md
 [nginx]: ../practice/nginx.md
-[ssh-rsync]: ../practice/ssh.rsync.md
+[ssh-rsync]: ../practice/ssh-rsync.md
+[daily-maintenance]: ../practice/daily-maintenance.md
+[template]: ./template.md
