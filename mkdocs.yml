@@ -29,7 +29,7 @@ theme:
     - content.tooltips
     # - header.autohide
     # - navigation.expand
-    - navigation.footer
+    # - navigation.footer
     - navigation.indexes
     # - navigation.instant
     # - navigation.instant.prefetch
@@ -83,8 +83,10 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Enec0De
+      name: github.com/Enec0De
     # - icon: fontawesome/brands/x-twitter
     #   link: https://x.com/home
+  generator: false
 
 extra_javascript:
   - assets/javascripts/katex.js
