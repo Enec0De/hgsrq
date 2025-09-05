@@ -5,14 +5,16 @@ status: new
 前言 { id="homepage" }
 ======================
 
-> 创建于：2025-08-09 | 最后更新：2025-08-09
+> 创建于：2025-08-09 | 最后更新：2025-09-05
 
 ---
 
 关于该网站 { id="about-websit" }
 --------------------------------
 
-域名 hgsrq.fun 取自名称 Handy Guide: Standard References & Quickstarts 各单词首字母。作为一款*轻量级速查实践手册*，它的核心是为了辅助回忆，内容会力求简洁，同时确保高信息密度，不做冗余解释[^1]。它主要聚焦于三点：
+域名 hgsrq.fun 取自名称 Handy Guide: Standard References & Quickstarts 各单词首字母。
+
+作为一款*轻量级速查实践手册*，它的核心是为了辅助回忆，内容会力求简洁，同时确保高信息密度，不做冗余解释[^1]。它主要聚焦于三点：
 
 -   便捷指南（Handy Guide）：这是一篇带有个人风格的速查手册，只记录实践中的关键步骤与灵感碎片。
 -   标准化参考（Standard References）：结构化整理我接触过的技术文档、API规范、编程语言等学习要点，略去冗余解释。
@@ -20,36 +22,48 @@ status: new
 
 ---
 
-一些名人名言 { id="famous-quotes" }
------------------------------------
+实践理念 { id="famous-quotes" }
+-------------------------------
 
-提供了原文与我自己的理解[^2]，因其可能作为行为准则而被列在此处：
+我们正在迈入 AI 的时代，因此人类的工作应逐渐变得与以往不同：
+
+-   不必详细列出工具的所有功能选项，我们更应该宽泛地了解它能做什么、怎么做。
+
+    > 我们需要记录更具体的**实践**。
+
+-   不必强行包含所有细节，我们创造的东西应该更贴近人类本身，符合人的阅读习惯。
+
+    > 我们的文档需要更好的**可读性**。
+
+这些繁杂冗余的工作 AI 会帮我们组织与实现[^2]，即便在这个过程中兜底的依然还是人类。
+
+---
 
 <div class="grid cards" markdown>
 
--   > "Code is read much more often than it is written." (Van Rossum)
+-   > "Code is read much more often than it is written." 
 
-    比起偷懒少打几行字，更重要的应该是代码的可读性。
+    :octicons-comment-24:: Guido van Rossum（Python 之父）
 
--   > "Simplicity is prerequisite for reliability." (Dijkstra)
+-   > "Simplicity is prerequisite for reliability." 
 
-    简洁的代码，可读性高，进一步也就表明了它越可靠。
+    :octicons-comment-24:: Edsger Dijkstra（算法先驱）
 
--   > "All problems in computer science can be solved by another level of indirection." (Wheeler)
+-   > "Good code is its own best documentation." 
 
-    解决问题的时候间接和抽象很重要。
+    :octicons-comment-24:: Steve McConnell（软件工程权威）
 
--   > "Good code is its own best documentation." (McConnell)
+-   > "Premature optimization is the root of all evil." 
 
-    好的代码可以做到简洁明了，不言而喻，不该总想着让注释去弥补。
+    :octicons-comment-24:: Donald Knuth（计算机科学泰斗）
 
--   > "Premature optimization is the root of all evil." (Knuth)
+-   > "All problems in computer science can be solved by another level of indirection." 
 
-    盲目的优化会牺牲可读性和可维护性。
+    :octicons-comment-24:: David Wheeler（计算机科学家）
 
--   > "Done is better than perfect." (Zuckerberg)
+-   > "Done is better than perfect." 
 
-    要去实践。
+    :octicons-comment-24:: Mark Zuckerberg（Facebook 创始人）
 
 </div>
 
@@ -66,4 +80,4 @@ status: new
 -   请自行承担相关风险。
 
 [^1]: 你可以请教强大好用的人工智能，让他帮你解释细节。
-[^2]: 对于这些名句，你也可以有自己的理解。出处请自行验证。
+[^2]: 所有文档的内容基本都是我亲手撰写，尽量避免了 AI 直接生成。这也是我实践内容的一部分。

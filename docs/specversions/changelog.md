@@ -5,12 +5,16 @@ title: 更新日志
 更新日志 { #changelog }
 ========
 
-> 创建于：2025-08-09 | 最后更新：2025-09-02
+> 创建于：2025-08-09 | 最后更新：2025-09-05
 
 ---
 
 Handy Guide: Standard References & Quickstarts
 ----------------------------------------------
+
+### v1.2.1 - 2025-09-05 { id="1.2.1" }
+
+-   Modified: 修改了[前言][homepage]的表述
 
 ### v1.2.0 - 2025-09-02 { id="1.2.0" }
 
@@ -39,3 +43,4 @@ Handy Guide: Standard References & Quickstarts
 [ssh-rsync]: ../practice/ssh-rsync.md
 [daily-maintenance]: ../practice/daily-maintenance.md
 [template]: ./template.md
+[homepage]: ../index.md
