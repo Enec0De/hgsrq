@@ -153,6 +153,7 @@ nav:
     - 配置 NGINX: practice/nginx.md  
     - 密钥操作与文件同步: practice/ssh-rsync.md
     - 日常运维工作: practice/daily-maintenance.md
+    - 流量过滤与重定向: practice/nftables.md
   - 版本与规范:
     - 手册规范: specversions/template.md
     - 更新日志: specversions/changelog.md
