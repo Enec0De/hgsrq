@@ -12,6 +12,11 @@ title: 更新日志
 Handy Guide: Standard References & Quickstarts
 ----------------------------------------------
 
+### v1.3.0 - 2025-09-08 { id="1.3.0" }
+
+-   Added: 添加了[流量过滤与重定向][nftables]页面
+-   Fixed: 修正了[日常运维工作][daily-maintenance]页面中的错误
+
 ### v1.2.1 - 2025-09-05 { id="1.2.1" }
 
 -   Modified: 修改了[前言][homepage]的表述
@@ -44,3 +49,4 @@ Handy Guide: Standard References & Quickstarts
 [daily-maintenance]: ../practice/daily-maintenance.md
 [template]: ./template.md
 [homepage]: ../index.md
+[nftables]: ../practice/nftables.md

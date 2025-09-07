@@ -5,7 +5,7 @@ title: 日常运维工作
 日常运维工作 { id="daily-maintenance" }
 =======================================
 
-> 创建于：2025-08-24 | 最后更新：2025-09-02
+> 创建于：2025-08-24 | 最后更新：2025-09-08
 
 ---
 
@@ -27,17 +27,26 @@ title: 日常运维工作
 安装与配置 { id="installation-and-configuration" }
 --------------------------------------------------
 
-可以在执行脚本前，使用 `top` 命令，先后按下 ++p++ 和 ++m++ 排序观察系统 CPU、内存资源，或按下 ++l++ 快速锁定 `Nginx` 相关进程，速览服务器当前进程状况。
+因为 `top` 工具更适合交互使用，所以你可以在脚本执行前：
+
+-   使用 `top` 命令，先后按下 ++p++ 和 ++m++ 排序观察系统 CPU、内存资源
+-   或按下 ++l++ 快速锁定 `Nginx` 相关进程，速览服务器当前进程状况
 
 ``` sh linenums="1"
 #!/usr/bin/env sh
 # Script Name: nginx_maintenance.sh
 # Author: Aina
-# Data Created: 2025-08-25 | Data Modified: 2025-09-02
+# Data Created: 2025-08-25 | Data Modified: 2025-09-08
 
 # Exit immediately if a command exits with a non-zero status
 # Treat unset variables as an error and exit immediately
 set -eu
+
+# Check the permission
+if [ $(id -u) -ne 0 ]; then
+    echo 'This script must be run with `sudo`.'
+    exit 1
+fi
 
 # Define variables
 log_dir="/var/log/nginx"
@@ -63,7 +72,7 @@ command_exist() {
 check_status() {
     if command_exist ${1}; then
         print_head "${1}" >> "${report_file}"
-        /usr/bin/env sh -euc "${1}" >> "${report_file}"
+        eval "${1}" >> "${report_file}"
         echo "\`\`\`\n" >> "${report_file}"
     else
         echo "Command \`${1}' not found." >> "${report_file}"
@@ -119,15 +128,15 @@ check_status 'ss -tunlp'
 ----------------------------------
 
 -   基本系统资源相关：[`man 1 top`][top]、[`man 1 uptime`][uptime]、[`man 1 free`][free]、[`man 1 dmesg`][dmesg]、[`man 8 vmstat`][vmstat]
--   磁盘空间状态相关：[`man 1 du`][du][`man 1 df`][df]
+-   磁盘空间状态相关：[`man 1 du`][du]、[`man 1 df`][df]
 -   进程与网络状态相关：[`man 1 ps`][ps]、[`man 8 ss`][ss]
 
-[ss]: https://manpages.debian.org/bookworm/iproute2/ss.8.en.html
-[vmstat]: https://manpages.debian.org/bookworm/procps/vmstat.8.en.html
-[df]: https://manpages.debian.org/bookworm/coreutils/df.1.en.html
-[du]: https://manpages.debian.org/bookworm/coreutils/du.1.en.html
-[free]: https://manpages.debian.org/bookworm/procps/free.1.en.html
-[top]: https://manpages.debian.org/bookworm/procps/top.1.en.html
-[ps]: https://manpages.debian.org/bookworm/procps/ps.1.en.html
-[uptime]: https://manpages.debian.org/bookworm/procps/uptime.1.en.html
-[dmesg]: https://manpages.debian.org/bookworm/util-linux/dmesg.1.en.html
+[ss]: https://manpages.debian.org/bookworm/iproute2/ss.8.en.html "SS(8)"
+[vmstat]: https://manpages.debian.org/bookworm/procps/vmstat.8.en.html "VMSTAT(8)"
+[df]: https://manpages.debian.org/bookworm/coreutils/df.1.en.html "DF(1)"
+[du]: https://manpages.debian.org/bookworm/coreutils/du.1.en.html "DU(1)"
+[free]: https://manpages.debian.org/bookworm/procps/free.1.en.html "FREE(1)"
+[top]: https://manpages.debian.org/bookworm/procps/top.1.en.html "TOP(1)"
+[ps]: https://manpages.debian.org/bookworm/procps/ps.1.en.html "PS(1)"
+[uptime]: https://manpages.debian.org/bookworm/procps/uptime.1.en.html "UPTIME(1)"
+[dmesg]: https://manpages.debian.org/bookworm/util-linux/dmesg.1.en.html "DMESG(1)"
