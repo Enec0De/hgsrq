@@ -1,13 +1,57 @@
-/* 定义等宽字体 */
+/* Definition of font  */
 @font-face {
-  font-family: "BrightCode-Light";
-  src:
-    url("../fonts/LXGWBrightCode-Light.woff2");
-  font-display: swap;
+    font-family: "NeoZhiSongPlus";
+    src:
+        url("https://fonts.hgsrq.fun/LXGWNeoZhiSongPlus.woff2") format("woff2");
+    font-display: swap;
 }
 
-/* 设定全局字体 */
+@font-face {
+    font-family: "BrightCodeLight";
+    src:
+        url("https://fonts.hgsrq.fun/LXGWBrightCode-Light.woff2") format("woff2");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "NeoXiHeiPlus";
+    src:
+        url("https://fonts.hgsrq.fun/LXGWNeoXiHeiPlus.woff2") format("woff2");
+    font-display: swap;
+}
+
+/* Global font */
 :root {
-   --md-text-font: "BrightCode-Light";
-   --md-code-font: "BrightCode-Light";
- }
+    --md-text-font: "NeoXiHeiPlus";
+    --md-code-font: "BrightCodeLight";
+}
+
+/* Definition of class */
+.md-typeset {
+    font-size: .7rem;
+}
+
+.format-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: BrightCodeLight;
+}
+
+.copyright-text {
+    margin-right: 0.5em;
+}
+
+.icp-record {
+    margin-right: 1em;
+}
+
+.police-record {
+    display: flex;
+    align-items: center;
+}
+
+.police-icon {
+    width: 1.1em;
+    margin-right: 0.9em;
+}

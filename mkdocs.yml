@@ -12,9 +12,23 @@ edit_uri: edit/main/docs/
 
 # Copyright
 copyright: >-
-  Copyright &copy; 2025 Aina. Licensed under 
-  <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0</a>.<br>
-  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">赣 ICP 备 2025069805 号</a>
+
+  <div class="format-footer">
+    <div class="copyright-text">Copyright &copy; 2025 Aina.</div>
+    <div>
+      Licensed under 
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noreferrer" target="_blank">CC BY-NC 4.0</a>.
+    </div>
+  </div>
+
+  <div class="format-footer">
+    <div>ICP 备案号：</div>
+    <a href="https://beian.miit.gov.cn/" class="icp-record" rel="noreferrer" target="_blank">赣 ICP 备 2025069805 号</a>
+    <a href="https://beian.mps.gov.cn/#/query/webSearch?code=44197202000131" class="police-record" rel="noreferrer" target="_blank">
+      <img src="/assets/images/logo01.png" class="police-icon" alt="公网安备图标">
+      粤公网安备 44197202000131 号
+    </a>
+  </div>
 
 # Configuration
 theme:
@@ -80,12 +94,12 @@ plugins:
 
 # Additional configuration
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/Enec0De
-      name: github.com/Enec0De
-    # - icon: fontawesome/brands/x-twitter
-    #   link: https://x.com/home
+  # social:
+  #   - icon: fontawesome/brands/github
+  #     link: https://github.com/Enec0De
+  #     name: github.com/Enec0De
+  #   - icon: fontawesome/brands/x-twitter
+  #     link: https://x.com/home
   generator: false
 
 extra_javascript:
@@ -112,7 +126,8 @@ markdown_extensions:
       generic: true
   # - pymdownx.betterem:
   #     smart_enable: all
-  # - pymdownx.caret
+  - pymdownx.caret:
+      superscript: false
   - pymdownx.details
   - pymdownx.emoji:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg

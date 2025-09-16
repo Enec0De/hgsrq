@@ -5,22 +5,19 @@ title: 流量过滤与重定向
 流量过滤与重定向 { id="nftables" }
 ==================================
 
-> 创建于：2025-09-03 | 最后更新：2025-09-08
+> 创建于：2025-09-03 :octicons-chevron-right-16: 最后更新：2025-09-16
 
 ---
 
 简介说明 { id="introduction" }
 ------------------------------
 
-本页将使用 `nft` 工具实现两个目标：
+本节记录的实践利用 `nft` 工具实现了两个目标：
 
-1. 开放基础的 22 (ssh), 443 (https) 号端口；
-1. 将 80 (http) 号端口的流量重定向到 8000 端口，用于测试。
+1. 开放基础的 22（`sshd`）, 443（HTTPS）号端口；
+1. 将 80（HTTP）号端口的流量重定向到 8000 端口，用于测试。
 
----
-
-前置条件 { id="prerequisites" }
--------------------------------
+### 前置条件 { id="prerequisites" }
 
 -   系统要求：Debian 12 (bookworm)
 -   相关工具：`nftables 1.0.6`
@@ -30,23 +27,19 @@ title: 流量过滤与重定向
 安装与配置 { id="installation-and-configuration" }
 --------------------------------------------------
 
-下方提供了三个文件：
+下方提供了两个 shell 脚本文件：
 
-1.  `nftables.sh`：
+1.  `nftables.sh`:
 
-    实现 `nftables` 配置的 shell 脚本，你可以跟着脚本手操。
+    实现 `nftables` 配置的 shell 脚本，你也可以根据脚本内容，在命令行自行输入执行。
 
-1.  `/etc/nftables.conf`：
+1.  `/etc/nftables.conf`:
 
     实现 `nftables` 配置的配置文件，这种方式的实现，可以让其原子地生效。
 
-1.  `/etc/nginx/sites-available/proxy`：
+=== ":octicons-file-code-16: `nftables.sh`"
 
-    额外提供使用 Nginx 在应用层实现流量重定向的方法，而非网络层（以 `nftables` 的方式）。
-
-=== ":octicons-file-code-16: nftables.sh"
-
-    ``` sh linenums="1"
+    ``` sh linenums="1" hl_lines="44-47 49-51 53-54"
     #!/usr/bin/env sh
     # Script Name: nftables.sh
     # Author: Aina
@@ -103,7 +96,7 @@ title: 流量过滤与重定向
     nft add rule inet nat prerouting tcp dport 80 redirect to :8000
     ```
 
-=== ":octicons-file-code-16: /etc/nftables.conf"
+=== ":octicons-file-code-16: `/etc/nftables.conf`"
 
     ``` sh linenums="1"
     #!/usr/sbin/nft -f
@@ -142,20 +135,26 @@ title: 流量过滤与重定向
     }
     ```
 
-=== ":octicons-file-code-16: sites-available/proxy"
+### 额外补充 { id="nginx" }
 
-    ``` nginx
-    server {
-            listen 80;
-    
-            server_name example.com;
-    
-            location / {
-                    proxy_pass http://localhost:8000;
-                    proxy_set_header Host $host;
-            }
-    }
-    ```
+这里额外提供一种使用 Nginx 在 ^^应用层^^ 实现流量重定向的方法：
+
+``` nginx title="sites-available/proxy"
+server {
+        listen 80;
+
+        server_name example.com;
+
+        location / {
+                proxy_pass http://localhost:8000;
+                proxy_set_header Host $host;
+        }
+}
+```
+
+!!! tip "提示"
+
+    上述通过 `nftables` 实现的流量过滤在 ^^网络层^^ 生效。
 
 ---
 
@@ -185,7 +184,7 @@ title: 流量过滤与重定向
 
 -   **原因分析：**
 
-    这是正常现象。对于来自外部的请求，`tcpdump` 先于 PREROUTING 链处理流量，因此“只能看到目标端口为 80 的流量”。在 PREROUTING 处理完流量后，所有的请求都重定向为 8000 端口，所以要在 INPUT 链中“开放 80 端口”。这两者并不矛盾。
+    这是正常现象。对于来自外部的请求，`tcpdump` 先于 PREROUTING 链处理流量，因此“只能看到目标端口为 80 的流量”。在 PREROUTING 处理完流量后，所有的请求都重定向为 8000 端口，所以要在 INPUT 链中“开放 8000 端口”。这两者并不矛盾。
 
 -   **解决方案：**
 
