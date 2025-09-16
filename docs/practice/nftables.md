@@ -5,7 +5,7 @@ title: 流量过滤与重定向
 流量过滤与重定向 { id="nftables" }
 ==================================
 
-> 创建于：2025-09-03 :octicons-chevron-right-16: 最后更新：2025-09-16
+> 创建于：2025-09-03 :octicons-chevron-right-16: 最后更新：2025-09-17
 
 ---
 
@@ -27,7 +27,7 @@ title: 流量过滤与重定向
 安装与配置 { id="installation-and-configuration" }
 --------------------------------------------------
 
-下方提供了两个 shell 脚本文件：
+下方提供了两个文件：
 
 1.  `nftables.sh`:
 
@@ -35,7 +35,7 @@ title: 流量过滤与重定向
 
 1.  `/etc/nftables.conf`:
 
-    实现 `nftables` 配置的配置文件，这种方式的实现，可以让其原子地生效。
+    实现 `nftables` 配置的配置文件，这种方式的实现，可以让规则原子地生效。
 
 === ":octicons-file-code-16: `nftables.sh`"
 
