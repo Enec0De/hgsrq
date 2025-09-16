@@ -5,19 +5,19 @@ title: 配置 Nginx
 配置 Nginx { id="nginx" }
 =============================
 
-> 创建于：2025-08-16 | 最后更新：2025-08-23
+> 创建于：2025-08-16 :octicons-chevron-right-16: 最后更新：2025-09-16
 
 ---
 
 简介说明 { id="introduction" }
 ------------------------------
 
-配置 Nginx 服务，并获取 Let's Encrypt 证书。
+本节提供的实践记录包含以下内容：
 
----
+1.  获取域名的 Let's Encrypt 证书。
+1.  配置 Nginx 以提供网页服务，同时附加一些额外的安全配置。
 
-前置条件 { id="prerequisites" }
--------------------------------
+### 前置条件 { id="prerequisites" }
 
 -   系统要求：Debian 12 (bookworm)
 -   相关工具：`Nginx 1.22.1`、`certbot`、`crontab`、`systemd`
@@ -26,44 +26,28 @@ title: 配置 Nginx
 安装与配置 { id="installation-and-configuration" }
 --------------------------------------------------
 
-安装并获取 ssl 证书的步骤相对简单，执行下方脚本即可完成所有操作。同时，在脚本下方提供了 Nginx 的配置文件内容，分为*主要配置*和*可选配置*：
+### 获取证书 { id="certbot" }
 
--   *主要配置*的服务块让 Nginx 通过 HTTPS 协议为 `example.com` 域名提供网页服务。
--   *可选配置*包含三个服务块，从上到下的行为分别是：
-    1. 监听 HTTP 请求，通过 301 将其永久重定向到 HTTPS
-    1. 对非匹配域名访问的 HTTPS 请求直接拒绝握手
-    1. 对非匹配域名访问的 HTTP 请求直接关闭连接
+对于你拥有的域名 `example.com`，获取 ssl 证书的步骤相对简单，执行下方命令按提示操作即可：
 
-*主要配置*保证了 Nginx 可以提供基础的网页服务，*可选配置*提高了访问的安全性。建议在实际生产环境中，添加使用全部配置。
-
-``` sh linenums="1" hl_lines="16-17 19-24"
-#!/usr/bin/env sh
-# Script Name: set_the_letencrypt.sh
-# Author: Aina
-# Date Created: 2025-08-17 | Date Modified: 2025-08-19
-
-# Exit immediately if a command exits with a non-zero status
-# Treat unset variables as an error and exit immediately
-set -eu
-
-# Check the permission
-if [ $(id -u) -ne 0 ]; then
-    echo 'This script must be run with `sudo`.'
-    exit 1
-fi
-
-# Install the relavant package
-apt-get install nginx certbot python3-certbot-nginx
-
-# Check the PATH and create the Certificate
-if command -v nginx > /dev/null; then
-    certbot certonly --nginx -d example.com
-else
-    echo "There is no /sbin included in PATH."
-fi
-
-
+``` sh
+certbot certonly --manual --preferred-challenges=dns -d *.example.com -d example.com
 ```
+
+其中 `-d *.example.com` 选项表明，除了根域名外，你同时为其所有的**一级子域名**也申请一张统一的证书。
+
+!!! note "提示"
+    通过该方式获取的证书，无法依靠 `certbot renew` 自动更新[^1]。
+
+### 配置 Nginx { id="nginxconf" }
+
+下方提供的 Nginx 配置文件内容包含两个部分，分为 ^^主要配置^^ 和 ^^可选配置^^：
+
+-   ^^主要配置^^ 的服务块（server block）让 Nginx 通过 HTTPS 协议为 `example.com` 域名提供网页服务。
+-   ^^可选配置^^ 包含三个服务块（server block），从上到下实现的功能分别是：
+    1.  监听 HTTP 请求，通过 301 将其永久重定向到 HTTPS
+    1.  对非匹配域名访问的 HTTPS 请求直接拒绝握手
+    1.  对非匹配域名访问的 HTTP 请求直接关闭连接
 
 === ":octicons-file-code-16: `/etc/nginx/sites-available/default`: 主要"
 
@@ -137,6 +121,8 @@ fi
     }
     ```
 
+^^主要配置^^ 保证了 Nginx 可以提供基础的网页服务，^^可选配置^^ 提高了访问的安全性。在实际生产环境中，建议添加使用全部配置。
+
 ---
 
 故障排查 { id="troubleshooting" }
@@ -182,3 +168,5 @@ fi
 [nginx]: https://nginx.org/en/docs/beginners_guide.html "Beginner's Guide"
 [letsencrypt]: https://letsencrypt.org/docs/ "Documentation - Let's Encrypt"
 [certbot]: https://eff-certbot.readthedocs.io/en/stable/ "Certbot documentation"
+
+[^1]: 可以使用域名服务商的 API 结合脚本实现。

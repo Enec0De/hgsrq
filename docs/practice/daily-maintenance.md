@@ -5,19 +5,16 @@ title: 日常运维工作
 日常运维工作 { id="daily-maintenance" }
 =======================================
 
-> 创建于：2025-08-24 | 最后更新：2025-09-08
+> 创建于：2025-08-24 :octicons-chevron-right-16: 最后更新：2025-09-16
 
 ---
 
 简介说明 { id="introduction" }
 ------------------------------
 
-部署好 Nginx 服务之后，需要进行日常的维护工作，这一页会记录这些工作一般会干什么。
+本节记录的实践内容为：部署好 Nginx 服务之后，需要进行的日常维护工作。
 
----
-
-前置条件 { id="prerequisites" }
--------------------------------
+### 前置条件 { id="prerequisites" }
 
 -   系统要求：Debian 12 (bookworm)
 -   相关工具：`top`、`ps`、`du`、`df`、`free`、`iostat`、`vmstat`、`sar`、`ss`
@@ -27,12 +24,13 @@ title: 日常运维工作
 安装与配置 { id="installation-and-configuration" }
 --------------------------------------------------
 
-因为 `top` 工具更适合交互使用，所以你可以在脚本执行前：
+!!! info "技巧"
 
--   使用 `top` 命令，先后按下 ++p++ 和 ++m++ 排序观察系统 CPU、内存资源
--   或按下 ++l++ 快速锁定 `Nginx` 相关进程，速览服务器当前进程状况
+    因为 `top` 工具更适合交互使用，所以不放入脚本中执行。你可以在执行脚本前使用 `top` 命令先后按下 ++p++ 和 ++m++ ，排序观察系统 CPU、内存资源；然后按下 ++l++ 快速锁定 `Nginx` 相关进程，速览服务器当前进程状况。
 
-``` sh linenums="1"
+下方提供的脚本通过 `eval` 将字符串传递给 shell 解析执行。对于每个单独的命令，格式化其输出，实现了简单的系统信息状态收集功能：
+
+``` sh linenums="1" hl_lines="47-53 55-58 60-62"
 #!/usr/bin/env sh
 # Script Name: nginx_maintenance.sh
 # Author: Aina
@@ -53,7 +51,7 @@ log_dir="/var/log/nginx"
 current_date="$(date -I)"
 report_dir="${HOME}/maintenance_reports"
 report_file="${report_dir}/log_${current_date}.log"
-export website_dir="/var/www/html"
+website_dir="/var/www/html"
 
 mkdir -p "${report_dir}"
 

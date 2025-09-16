@@ -5,7 +5,7 @@ status: new
 前言 { id="homepage" }
 ======================
 
-> 创建于：2025-08-09 | 最后更新：2025-09-05
+> 创建于：2025-08-09 :octicons-chevron-right-16: 最后更新：2025-09-05
 
 ---
 
@@ -14,10 +14,10 @@ status: new
 
 域名 hgsrq.fun 取自名称 Handy Guide: Standard References & Quickstarts 各单词首字母。
 
-作为一款*轻量级速查实践手册*，它的核心是为了辅助回忆，内容会力求简洁，同时确保高信息密度，不做冗余解释[^1]。它主要聚焦于三点：
+作为一款 ^^轻量级速查实践手册^^，它的核心是为了辅助回忆，内容会力求简洁，同时确保高信息密度，不做冗余解释[^1]。它主要聚焦于三点：
 
 -   便捷指南（Handy Guide）：这是一篇带有个人风格的速查手册，只记录实践中的关键步骤与灵感碎片。
--   标准化参考（Standard References）：结构化整理我接触过的技术文档、API规范、编程语言等学习要点，略去冗余解释。
+-   标准化参考（Standard References）：结构化整理我接触过的技术文档、API 规范、编程语言等学习要点，略去冗余解释。
 -   快速入门（Quickstarts）：分步骤记录工具或框架的上手过程，提供实用模板和实践片段，方便快速回忆操作逻辑。
 
 ---
@@ -41,29 +41,29 @@ status: new
 
 <div class="grid cards" markdown>
 
--   > "Code is read much more often than it is written." 
+-   > "All problems in computer science can be solved by another level of indirection." 
 
-    :octicons-comment-24:: Guido van Rossum（Python 之父）
-
--   > "Simplicity is prerequisite for reliability." 
-
-    :octicons-comment-24:: Edsger Dijkstra（算法先驱）
-
--   > "Good code is its own best documentation." 
-
-    :octicons-comment-24:: Steve McConnell（软件工程权威）
+    :octicons-comment-16:: David Wheeler（计算机科学家）
 
 -   > "Premature optimization is the root of all evil." 
 
-    :octicons-comment-24:: Donald Knuth（计算机科学泰斗）
+    :octicons-comment-16:: Donald Knuth（计算机科学泰斗）
 
--   > "All problems in computer science can be solved by another level of indirection." 
+-   > "Simplicity is prerequisite for reliability." 
 
-    :octicons-comment-24:: David Wheeler（计算机科学家）
+    :octicons-comment-16:: Edsger Dijkstra（算法先驱）
+
+-   > "Good code is its own best documentation." 
+
+    :octicons-comment-16:: Steve McConnell（软件工程权威）
+
+-   > "Code is read much more often than it is written." 
+
+    :octicons-comment-16:: Guido van Rossum（Python 之父）
 
 -   > "Done is better than perfect." 
 
-    :octicons-comment-24:: Mark Zuckerberg（Facebook 创始人）
+    :octicons-comment-16:: Mark Zuckerberg（Facebook 创始人）
 
 </div>
 

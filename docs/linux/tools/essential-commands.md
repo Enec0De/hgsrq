@@ -116,6 +116,7 @@ wget -r -np -nH --cut-dirs=2 -R "index.html*" "https://example.com/dir1/dir2/fil
 
 -   `ma` 设置光标位置为标注 a，``a` 跳转到标注 a 的位置。
 -   `:marks` 列出所有标注
+-   `:set fileformat=unix/dos`
 
 ---
 

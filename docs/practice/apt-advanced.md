@@ -5,27 +5,26 @@ title: 系统升级与紧急降级
 系统升级与紧急降级 { id="apt-advanced" }
 ========================================
 
-> 创建于：2025-08-14 | 最后更新：2025-09-02
+> 创建于：2025-08-14 :octicons-chevron-right-16: 最后更新：2025-09-16
 
 ---
 
 简介说明 { id="introduction" }
 ------------------------------
 
-刚好最近 Debian 13 (trixie)[^1]发布，我打算乘此机会实践一次系统的全面更新与紧急降级操作。
+Debian 13 (trixie)[^1] 于近期发布。
+
+本节将会记录系统全面更新的实践，并附加对单个软件包（`pip3`）进行紧急降级操作的演示。因为这些操作本身就很危险，因此不提供“故障排查”内容用于参考。建议在开始前请做好数据备份，出问题了直接重装系统。
 
 !!! danger "警告"
 
-    本页面的操作只专注于全面更新与紧急降级的*操作本身*，不去考虑新发布系统的稳定性[^2]，是否使用请自行判断。
+    本页面只专注于全面更新与紧急降级的 ^^操作本身^^，不去考虑新发布系统的稳定性[^2]，是否使用新系统请自行判断。
 
----
-
-前置条件 { id="prerequisites" }
--------------------------------
+### 前置条件 { id="prerequisites" }
 
 -   系统要求：Debian 12 (bookworm)
 -   相关工具：`dpkg`、`apt-get`、`apt-mark`、`apt-cache`、`apt`、`tmux`
--   使用的数据源：[中科大镜像软件源][debian]、[中科大镜像软件安全更新源][debian-security]
+-   数据源：[中科大镜像软件源][debian]、[中科大镜像软件安全更新源][debian-security]
 
 ---
 
@@ -34,20 +33,20 @@ title: 系统升级与紧急降级
 
 如果是远程连接，建议在 `tmux` 中运行下方脚本，防止网络波动导致更新失败。脚本思路如下：
 
-1.  **十分重要**的前期安全检查工作（建议来自 [Release Notes for Debian 13][release-notes]）：
-    -   检查当前系统版本。
+1.  **十分重要**的 ^^前期安全检查工作^^（来自 [Release Notes for Debian 13][release-notes] 的建议）：
+
+    ??? danger "进行全面更新前后你需要做的事情"
+        
+        -   使用脚本前：手动执行 `apt list '?narrow(?installed, ?not(?origin(Debian)))'` 命令，处理可能会出问题的包。
+    
+        -   更新系统后：手动执行 `apt purge '~o'`、`apt purge '~c'` 和 `apt autoremove` 命令，清理多余的包和配置文件。
+
+    -   检查当前系统版本：确定你正在从 Debian 12 升级到 Debian 13。
     -   使用 `tar` 和 `dpkg` 工具备份重要数据。
     -   使用 `find`、`dpkg` 和 `apt-mark` 工具进行前期检查。
 
-1.  修改 APT 系统数据源。
-1.  开始更新系统。
-1.  最后重启系统。
-
-??? danger "进行全面更新前后你需要做的事情"
-    
-    -   使用脚本前：手动执行 `apt list '?narrow(?installed, ?not(?origin(Debian)))'` 命令，处理可能会出问题的包。
-
-    -   更新系统后：手动执行 `apt purge '~o'`、`apt purge '~c'` 和 `apt autoremove` 命令，清理多余的包和配置文件。
+1.  修改 APT 系统数据源为[中科大镜像软件源][debian]与[中科大镜像软件安全更新源][debian-security]。
+1.  开始执行更新系统的操作，更新后重启系统。
 
 ``` sh linenums="1" hl_lines="16-22 38-40 42-49 51-56 58-60 62-65"
 #!/usr/bin/env sh
@@ -117,27 +116,34 @@ sleep 10
 systemctl reboot
 ```
 
+---
+
 紧急降级 { id="downgrade" }
 ---------------------------
 
-如果你在生产环境中发现新版本 `pip3` 的特性有 bug，下面提供了一个具体实践用于紧急降级。请仔细阅读[文档][aptpinning]，并结合 `apt-cache` 和 `apt policy` 命令严谨地使用这个技术。
+如果你在生产环境中，发现新版本的 `pip3` 有 bug，需要回退，下面提供了一个具体实践用于演示如何对其降级。操作前请仔细阅读[文档][aptpinning]。这个操作很危险，建议结合 `apt-cache` 和 `apt policy` 工具严谨地使用这个技术。
 
-??? danger "实际使用这个技术之前你必须知道的事"
+!!! danger "实际使用这个技术之前你必须知道的事"
 
-    降级在 Debian 设计上就不被官方支持。该操作只建议用于回退通过 `apt-pinning` 临时升级的*非核心*、*低依赖*软件。其他非常规、高风险的用法，极易产生系统依赖链的断裂，造成难以挽回的后果。
+    降级在 Debian 设计上就不被官方支持。该操作只建议用于回退通过 `apt-pinning` 临时升级的 ^^非核心^^、^^低依赖^^ 软件。其他非常规、高风险的用法，极易产生系统依赖链的断裂，造成难以挽回的后果。
 
     对于重要系统，你应当在恢复操作后备份所有重要数据，并从零开始重新安装一个新的系统。
 
-=== ":octicons-file-code-16: Latest version of pip3"
 
-    ``` sh title="/etc/apt/preferences"
-    Explanation: Date Created: 2025-08-14 | Date Modified: 2025-08-14
+先确认降级前的系统状态与 `pip3` 的版本：
+
+-   文件 `/etc/apt/preferences` 的内容如下所示。
+-   使用 `apt policy` 工具可以检查当前软件包的选择优先级。
+
+=== ":octicons-file-code-16: `/etc/apt/preferences`"
+
+    ``` sh
+    Explanation: Date Created: 2025-08-10 | Date Modified: 2025-08-14
 
     Explanation: Install only the most recent trixie version of pip3
     Package: python3-pip
     Pin: release n=trixie*
     Pin-Priority: 700
-    
 
     Explanation: Install package if it is selected for installation
     Explanation: and no version of the package is already installed
@@ -146,24 +152,10 @@ systemctl reboot
     Pin-Priority: 50
     ```
 
-=== ":octicons-file-code-16: Downgrade the pip3"
-
-    ``` sh title="/etc/apt/preferences"
-    Explanation: Date Created: 2025-08-14 | Date Modified: 2025-08-14
-
-    Explanation: Emergency_downgrading  
-    Package: *
-    Pin: release n=bookworm*
-    Pin-Priority: 1001
-    ```
-
-<!-- -->
-
-=== ":octicons-terminal-16: Latest version of pip3"
+=== ":octicons-terminal-16: terminal"
 
     ``` sh
-    # Check the priority of pip3
-    $ apt policy python3-pip
+    $ sudo apt policy python3-pip # Check the priority of pip3
     python3-pip:
       Installed: 25.1.1+dfsg-1
       Candidate: 25.1.1+dfsg-1
@@ -173,37 +165,52 @@ systemctl reboot
             100 /var/lib/dpkg/status
          23.0.1+dfsg-1 500
             500 https://mirrors.ustc.edu.cn/debian bookworm/main amd64 Packages
-
-
-    # Check the version of pip3
-    $ pip3 -V
+    $ pip3 -V # Check the version of pip3
     pip 25.1.1 from /usr/lib/python3/dist-packages/pip (python 3.11)
     ```
-=== ":octicons-terminal-16: Downgrade the pip3"
+
+### 开始降级操作 { id="begin-downgrade" }
+
+接下来我们开始进行版本回退操作：
+
+1.  先修改 `/etc/apt/preferences` 的内容：
+
+    ``` sh title="/etc/apt/preferences"
+    Explanation: Date Created: 2025-08-14 | Date Modified: 2025-08-14
+    
+    Explanation: Emergency_downgrading  
+    Package: *
+    Pin: release n=bookworm*
+    Pin-Priority: 1001
+    ```
+
+1.  执行 `sudo apt update` 后使用 `sudo apt full-upgrade` 命令开始降级，此时屏幕的输出如下（略去无关内容）：
+
+    !!! danger "警告"
+
+        请在每次修改好 `/etc/apt/preferences` 文件内容后，都执行一次执行 `sudo apt update` 以应用配置。
 
     ``` sh
-    $ sudo apt full-upgrade
-    Reading package lists... Done
-    Building dependency tree... Done
-    Reading state information... Done
-    Calculating upgrade... Done
+    $ sudo apt update && sudo apt full-upgrade
+    ...
     The following packages will be DOWNGRADED:
       python3-pip
     0 upgraded, 0 newly installed, 1 downgraded, 0 to remove and 0 not upgraded.
-    Need to get 1,325 kB of archives.
-    After this operation, 3,572 kB disk space will be freed.
-    Do you want to continue? [Y/n] y
-    Get:1 https://mirrors.ustc.edu.cn/debian bookworm/main amd64 python3-pip all 23.
-    0.1+dfsg-1 [1,325 kB]
+    ...
+    Do you want to continue? [Y/n] y # Enter `y' to continue.
+    Get:1 https://mirrors.ustc.edu.cn/debian bookworm/main amd64 python3-pip all 23.0.1+dfsg-1 [1,325 kB]
     Fetched 1,325 kB in 1s (1,883 kB/s)
     dpkg: warning: downgrading python3-pip from 25.1.1+dfsg-1 to 23.0.1+dfsg-1
     (Reading database ... 41913 files and directories currently installed.)
     Preparing to unpack .../python3-pip_23.0.1+dfsg-1_all.deb ...
     Unpacking python3-pip (23.0.1+dfsg-1) over (25.1.1+dfsg-1) ...
-    Setting up python3-pip (23.0.1+dfsg-1) ...
-    Processing triggers for man-db (2.11.2-2) ...
-    
-    $ pip3 -V
+    ...
+    ```
+
+1.  上述命令执行完成后，你可以检查你的 `pip3` 版本：
+ 
+    ``` sh
+    $ pip3 -V # Check the version of pip3
     pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)
     ```
 
