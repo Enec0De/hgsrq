@@ -5,7 +5,7 @@ title: 密钥操作与文件同步
 密钥操作与文件同步 { id="ssh-rsync" }
 =====================================
 
-> 创建于：2025-08-20 :octicons-chevron-right-16: 最后更新：2025-09-16
+> 创建于：2025-08-20 :octicons-chevron-right-16: 最后更新：2025-09-17
 
 ---
 
@@ -146,7 +146,7 @@ chmod g+s "${project_dir}"
     #!/usr/bin/env sh
     # Script Name: rsync_to_remote.sh
     # Author: Aina
-    # Date Created: 2025-09-02 | Date Modified: 2025-09-16
+    # Date Created: 2025-09-02 | Date Modified: 2025-09-17
     
     # Exit immediately if a command exits with a non-zero status
     # Treat unset variables as an error and exit immediately
@@ -175,7 +175,7 @@ chmod g+s "${project_dir}"
     mkdocs build
     
     # Sync
-    rsync -rltD -zvu --delete "${src}" "${des}"
+    rsync -rlcD -zvu --delete "${src}" "${des}"
     rm -rf "${src}"
     echo "All done."
     ```
@@ -211,7 +211,26 @@ chmod g+s "${project_dir}"
 
 -   **解决方案：**
 
-    修改开发者用户的默认组为 **developers** 后传输文件，或直接递归修改 `/var/www/html` 下文件的所属组为 **developers**。
+    修改开发者用户的默认组为 **developers** 后传输文件，或直接递归修改 `/var/www/html` 下文件的所属组。
+
+**3. `rsync` 提示错误**
+
+-   **问题描述：**
+
+    使用脚本同步本地与服务器项目文件时，rsync 提示权限不足，如：
+
+    ``` sh
+    rsync: [generator] failed to set times on "/path/to/file": Operation not permitted (1)
+    rsync: [receiver] mkstemp "path/to/file" failed: Permission denied (13)
+    ```
+
+-   **原因分析：**
+
+    本节提供的脚本主要用于单用户进行文件同步。修改文件时间、创建临时文件的权限，只有文件或文件夹的所有者以及 **root** 用户拥有。在多用户环境下，哪怕属于同一个组，用户也没有权限对其他人的文件或文件夹进行修改文件时间、创建临时文件操作的。
+
+-   **解决方案：**
+
+    本节提供的脚本并不满足你的需求，请自行进行更精细的权限管理。
 
 ---
 

@@ -12,11 +12,18 @@ title: 更新日志
 Handy Guide: Standard References & Quickstarts
 ----------------------------------------------
 
+### v1.3.2 - 2025-09-17 { id="1.3.2" }
+
+-   Added: 添加了[密钥操作与文件同步][ssh-rsync]页面中 ^^故障排查 (#troubleshooting)^^ 小节的第三点
+-   Fxied: 修改了[密钥操作与文件同步][ssh-rsync]页面中 `rsync_to_remote.sh` 脚本的内容
+-   Fxied: 修正了[流量过滤与重定向][nftables]页面中的表述错误
+-   Fxied: 优化了[系统升级与紧急降级][apt-advanced]页面警告框中的表述
+
 ### v1.3.1 - 2025-09-16 { id="1.3.1" }
 
 -   Added: 页面底部新增备案信息
 -   Added: [手册规范][template]新增下划线元素
--   Fixed: 所有页面的 ^^前置条件 (#prerequisites)^^ 小节归入 ^^简介说明 (#introduction)^^ 以优化内容结构
+-   Fixed: 所有页面的 ^^前置条件 (#prerequisites)^^ 小节归入 ^^简介说明 (#introduction)^^ 小节以优化内容结构
 -   Fxied: 优化了**系统学习实践**分类下各页面的表达
 
 ### v1.3.0 - 2025-09-08 { id="1.3.0" }
