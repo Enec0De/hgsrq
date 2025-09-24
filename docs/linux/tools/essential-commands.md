@@ -35,6 +35,25 @@ title: 常用工具
 wget -r -np -nH --cut-dirs=2 -R "index.html*" "https://example.com/dir1/dir2/files/"
 ```
 
+`curl`:
+
+``` bash
+curl -fsSL https://example.com/path/to/filename -o /path/to/newfilename
+curl -LO https://example.com/path/to/filename
+```
+
+`nc`:
+
+``` bash
+nc 127.0.0.1 6443 -zv -w 2
+```
+
+`sudo`:
+
+``` bash
+sudo -Es
+```
+
 ---
 
 `bash`:

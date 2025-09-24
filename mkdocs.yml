@@ -94,9 +94,11 @@ plugins:
 
 # Additional configuration
 extra:
-  # social:
+  social:
   #   - icon: fontawesome/brands/github
   #     link: https://github.com/Enec0De
+  #   - icon: fontawesome/brands/docker
+  #     link: https://hub.docker.com/
   #     name: github.com/Enec0De
   #   - icon: fontawesome/brands/x-twitter
   #     link: https://x.com/home
