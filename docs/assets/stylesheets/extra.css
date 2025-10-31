@@ -1,4 +1,6 @@
 /* Definition of font  */
+
+/*
 @font-face {
     font-family: "NeoZhiSongPlus";
     src:
@@ -19,12 +21,16 @@
         url("https://fonts.hgsrq.fun/LXGWNeoXiHeiPlus.woff2") format("woff2");
     font-display: swap;
 }
+*/
 
 /* Global font */
+
+/*
 :root {
     --md-text-font: "NeoXiHeiPlus";
     --md-code-font: "BrightCodeLight";
 }
+*/
 
 /* Definition of class */
 .md-typeset {
@@ -35,7 +41,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    font-family: BrightCodeLight;
+    /* font-family: BrightCodeLight; */
 }
 
 .copyright-text {
